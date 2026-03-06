@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piattaforma INCIDE - Presentazione Commerciale</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --orange: #E87C3A;
+            --orange-light: #f5a66e;
+            --orange-bg: rgba(232, 124, 58, 0.08);
+            --green: #4CAF9F;
+            --green-light: rgba(76, 175, 159, 0.1);
+            --black: #2C2C2C;
+            --gray-light: #F5F5F5;
+            --gray-medium: #E0E0E0;
+            --gray-text: #777;
+            --red: #D64545;
+            --red-light: rgba(214, 69, 69, 0.08);
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--black);
+            background: #1a1a1a;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background: var(--white);
+            position: relative;
+            padding: 60px 80px 80px;
+            overflow-y: auto;
+        }
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--orange);
+        }
+
+        .logo {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #bbb;
+            text-transform: uppercase;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+        h1 .accent { color: var(--orange); }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 22px;
+            font-weight: 400;
+            color: var(--gray-text);
+            line-height: 1.5;
+            max-width: 700px;
+        }
+
+        .tagline {
+            font-size: 28px;
+            font-weight: 500;
+            color: var(--gray-text);
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .card {
+            background: var(--gray-light);
+            border-radius: 12px;
+            padding: 28px 32px;
+        }
+        .card-orange {
+            background: var(--orange-bg);
+            border-left: 4px solid var(--orange);
+        }
+        .card-green {
+            background: var(--green-light);
+            border-left: 4px solid var(--green);
+        }
+        .card-red {
+            background: var(--red-light);
+            border-left: 4px solid var(--red);
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+
+        .flex-grow {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .badge-green { background: var(--green); color: white; }
+        .badge-orange { background: var(--orange); color: white; }
+        .badge-red { background: var(--red); color: white; }
+        .badge-gray { background: #999; color: white; }
+
+        .metric-big {
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--orange);
+            line-height: 1;
+        }
+        .metric-label {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--gray-text);
+            margin-top: 8px;
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--orange);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        table th {
+            background: var(--black);
+            color: white;
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--gray-medium);
+            font-size: 15px;
+        }
+        table tr:last-child td { border-bottom: none; }
+        table tr:nth-child(even) { background: var(--gray-light); }
+
+        .before-col { color: var(--red); font-weight: 600; }
+        .after-col { color: var(--green); font-weight: 600; }
+
+        .pricing-table th { text-align: center; font-size: 13px; }
+        .pricing-table th:first-child { text-align: left; }
+        .pricing-table td:not(:first-child) { text-align: center; font-size: 18px; }
+        .pricing-table td:first-child { font-size: 14px; }
+        .pricing-table .check { color: var(--green); font-weight: 700; }
+        .pricing-table .dash { color: #ddd; }
+        .pricing-table .section-row td {
+            background: var(--orange-bg);
+            font-weight: 700;
+            font-size: 11px !important;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--orange);
+            padding: 8px 20px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-btn:hover { background: #d06a2e; }
+
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--orange-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-bottom: 12px;
+        }
+
+        .separator {
+            height: 1px;
+            background: var(--gray-medium);
+            margin: 24px 0;
+        }
+
+        .connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--orange);
+            padding: 0 4px;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        #slide-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            font-weight: 500;
+            color: #999;
+            z-index: 100;
+            background: rgba(255,255,255,0.9);
+            padding: 6px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.06);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #999;
+            transition: all 0.2s;
+            z-index: 100;
+        }
+        .nav-arrow:hover { background: var(--orange); color: white; }
+        #prev-btn { left: 20px; }
+        #next-btn { right: 20px; }
+
+        .cover-slide {
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .cover-slide h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+        .bullet-list li {
+            padding: 10px 0;
+            font-size: 17px;
+            color: #555;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.5;
+        }
+        .bullet-list li .bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--orange);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .highlight-box {
+            background: var(--orange);
+            color: white;
+            border-radius: 12px;
+            padding: 28px 32px;
+        }
+        .highlight-box h3,
+        .highlight-box p { color: white; }
+
+        .kpi-card {
+            text-align: center;
+            padding: 32px 24px;
+        }
+        .kpi-card .kpi-value {
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--green);
+            line-height: 1;
+        }
+        .kpi-card .kpi-label {
+            font-size: 15px;
+            color: var(--gray-text);
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        .chain {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin-top: 16px;
+        }
+        .chain-step {
+            flex: 1;
+            padding: 24px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .chain-step:not(:last-child)::after {
+            content: '\2192';
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: var(--orange);
+            z-index: 1;
+        }
+        .chain-step .chain-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 8px;
+        }
+        .chain-step .chain-desc {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .path-card {
+            padding: 28px;
+            border-radius: 12px;
+            border: 2px solid var(--gray-medium);
+        }
+        .path-card.active-path {
+            border-color: var(--orange);
+            background: var(--orange-bg);
+        }
+        .path-card .path-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 8px;
+        }
+        .path-card .path-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .path-card .path-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .compare-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            width: 100%;
+        }
+        .compare-table th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .compare-table td {
+            padding: 12px 20px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        .compare-table tr:last-child td { border-bottom: none; }
+
+        .example-box {
+            border-radius: 8px;
+            padding: 16px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 40px 24px 70px; }
+            h1 { font-size: 32px; }
+            .cover-slide h1 { font-size: 40px; }
+            h2 { font-size: 26px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .chain { flex-direction: column; gap: 12px; }
+            .chain-step::after {
+                content: '\2193' !important;
+                right: auto !important;
+                bottom: -16px;
+                top: auto !important;
+                left: 50%;
+                transform: translateX(-50%) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div id="slide-indicator">1 / 17</div>
+<button class="nav-arrow" id="prev-btn" onclick="prevSlide()">&#8592;</button>
+<button class="nav-arrow" id="next-btn" onclick="nextSlide()">&#8594;</button>
+
+
+<!-- ==================== SLIDE 1: COVER ==================== -->
+<div class="slide cover-slide active" id="slide-1">
+    <div class="flex-grow" style="justify-content: center;">
+        <div class="section-label" style="margin-bottom: 24px;">Addictive &times; Incide Engineering</div>
+        <h1>Piattaforma <span class="accent">INCIDE</span></h1>
+        <p class="tagline" style="max-width: 750px; margin-bottom: 32px;">
+            Da documenti di gara a <strong>dati affidabili</strong><br>per decisioni e automazioni aziendali.
+        </p>
+        <p style="font-size: 18px; color: #888; margin-bottom: 8px; max-width: 650px; line-height: 1.5;">Non state pi&ugrave; chattando con i documenti.<br><strong style="color: var(--orange);">State costruendo software sopra di essi.</strong></p>
+        <p style="font-size: 14px; color: #bbb; margin-top: 24px;">Marzo 2026</p>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 2: FRAMEWORK VALORE ==================== -->
+<div class="slide" id="slide-2">
+    <div class="section-label">Il nostro approccio</div>
+    <h2>Come creiamo <span class="accent">valore misurabile</span></h2>
+    <p class="subtitle" style="margin-bottom: 40px;">Non vendiamo tecnologia. Miglioriamo processi e misuriamo i risultati.</p>
+
+    <div class="chain" style="background: var(--gray-light); border-radius: 16px; overflow: hidden;">
+        <div class="chain-step" style="background: rgba(232,124,58,0.05);">
+            <div class="chain-label">1. Processo</div>
+            <div class="chain-desc"><strong>Stato attuale</strong><br>Screening gare manuale</div>
+        </div>
+        <div class="chain-step" style="background: rgba(232,124,58,0.08);">
+            <div class="chain-label">2. Cambiamento</div>
+            <div class="chain-desc"><strong>Dati strutturati</strong><br>Estrazione + scoring automatico</div>
+        </div>
+        <div class="chain-step" style="background: rgba(232,124,58,0.12);">
+            <div class="chain-label">3. Risultato</div>
+            <div class="chain-desc"><strong>Impatto business</strong><br>Decisioni go/no-go pi&ugrave; rapide</div>
+        </div>
+        <div class="chain-step" style="background: rgba(232,124,58,0.16);">
+            <div class="chain-label">4. KPI</div>
+            <div class="chain-desc"><strong>Delta misurato</strong><br>Tempo, errori, volume</div>
+        </div>
+    </div>
+
+    <div class="card card-orange" style="margin-top: 32px;">
+        <p style="font-size: 16px; margin: 0;"><strong>Principio guida:</strong> Nessun risultato senza una baseline. Misuriamo il prima e il dopo di ogni intervento.</p>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 3: QUICK WIN ==================== -->
+<div class="slide" id="slide-3">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <div class="section-label" style="margin-bottom: 0;">Da dove partiamo</div>
+        <span class="badge badge-green">QUICK WIN</span>
+    </div>
+    <h2>Un'area, un processo,<br>massimo <span class="accent">impatto</span></h2>
+
+    <div class="grid-2" style="margin-top: 32px; flex: 1;">
+        <div>
+            <div class="card" style="margin-bottom: 20px;">
+                <div class="icon-circle">&#127970;</div>
+                <h3>Area: Ufficio Gare</h3>
+                <p style="font-size: 15px;">Il team che ogni giorno legge, analizza e valuta decine di documenti per decidere a quali gare partecipare.</p>
+            </div>
+            <div class="card">
+                <div class="icon-circle">&#128269;</div>
+                <h3>Processo: Screening Iniziale</h3>
+                <p style="font-size: 15px;">La prima qualificazione delle gare: leggere i documenti, estrarre i dati chiave, decidere se procedere.</p>
+            </div>
+        </div>
+        <div class="card card-green" style="display: flex; flex-direction: column; justify-content: center;">
+            <h3 style="color: var(--green);">Perch&eacute; partiamo da qui?</h3>
+            <ul class="bullet-list" style="margin-top: 12px;">
+                <li><span class="bullet" style="background: var(--green);"></span>Processo ripetitivo con alto volume</li>
+                <li><span class="bullet" style="background: var(--green);"></span>Risultati misurabili da subito</li>
+                <li><span class="bullet" style="background: var(--green);"></span>Impatto visibile su tutta l'azienda</li>
+                <li><span class="bullet" style="background: var(--green);"></span>Crea slancio per estendere ad altre aree</li>
+            </ul>
+            <p style="font-size: 13px; color: var(--green); margin-top: 20px; font-weight: 600;">Prossime aree: Progettazione, Strutture, Impianti, PR, Management</p>
+        </div>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 4: IL PROBLEMA OGGI (fusa con costo nascosto) ==================== -->
+<div class="slide" id="slide-4">
+    <div class="section-label">Il problema</div>
+    <h2>Come funziona <span style="color: var(--red);">oggi</span></h2>
+
+    <div class="grid-3" style="margin-top: 28px;">
+        <div class="card" style="text-align: center; padding: 32px 24px; border-top: 4px solid var(--red);">
+            <div style="font-size: 64px; font-weight: 800; color: var(--red); line-height: 1;">~4 gg</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--red); margin-top: 12px;">per analizzare una gara</div>
+            <p style="font-size: 14px; margin-top: 12px;">Ogni bando letto pagina per pagina. Dati copiati a mano in fogli Excel. Circa 32 ore di lavoro per una singola gara.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 32px 24px; border-top: 4px solid var(--red);">
+            <div style="font-size: 40px; font-weight: 800; color: var(--red); line-height: 1;">Decisioni<br>inconsistenti</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--red); margin-top: 12px;">tra persone e reparti</div>
+            <p style="font-size: 14px; margin-top: 12px;">Ogni persona valuta in modo diverso. La stessa gara pu&ograve; avere valutazioni opposte a seconda di chi la legge.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 32px 24px; border-top: 4px solid var(--red);">
+            <div style="font-size: 40px; font-weight: 800; color: var(--red); line-height: 1;">Gare perse<br>ogni mese</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--red); margin-top: 12px;">per mancanza di tempo</div>
+            <p style="font-size: 14px; margin-top: 12px;">Tra pubblicazione e scadenza passano giorni. Il team non riesce a valutare tutte le opportunit&agrave; disponibili.</p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 24px; background: var(--red-light); border: 1px solid rgba(214,69,69,0.15);">
+        <div class="grid-3" style="gap: 32px;">
+            <div>
+                <p style="font-size: 14px; font-weight: 600; color: var(--red); margin-bottom: 4px;">Costo diretto</p>
+                <p style="font-size: 14px;">Ore-persona dedicate a copia-incolla e lettura ripetitiva di documenti.</p>
+            </div>
+            <div>
+                <p style="font-size: 14px; font-weight: 600; color: var(--red); margin-bottom: 4px;">Costo opportunit&agrave;</p>
+                <p style="font-size: 14px;">Gare non valutate perch&eacute; il team non ha tempo di analizzarle tutte.</p>
+            </div>
+            <div>
+                <p style="font-size: 14px; font-weight: 600; color: var(--red); margin-bottom: 4px;">Costo rischio</p>
+                <p style="font-size: 14px;">Errori che portano a partecipare a gare non idonee o perdere quelle giuste.</p>
+            </div>
+        </div>
+    </div>
+
+    <p style="font-size: 12px; color: #aaa; margin-top: 12px; text-align: right;">Fonte: oltre 100 interviste ad aziende del settore ingegneria e costruzioni</p>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 5: PERCHÉ LA CHAT AI NON BASTA ==================== -->
+<div class="slide" id="slide-5">
+    <div class="section-label">Il falso shortcut</div>
+    <h2>Perch&eacute; una <span style="color: var(--red);">chat AI</span> non &egrave; la soluzione</h2>
+
+    <div class="grid-3" style="margin-top: 16px; margin-bottom: 16px; gap: 16px;">
+        <div class="card card-red" style="padding: 16px 20px;">
+            <p style="font-size: 13px; font-weight: 700; color: var(--red); margin-bottom: 4px;">Imprevedibilit&agrave;</p>
+            <p style="font-size: 12px; margin: 0;">Piccoli cambiamenti nella domanda producono risultati diversi. Anche con la stessa domanda, il modello pu&ograve; rispondere in modo diverso ogni volta.</p>
+        </div>
+        <div class="card card-red" style="padding: 16px 20px;">
+            <p style="font-size: 13px; font-weight: 700; color: var(--red); margin-bottom: 4px;">Non scala</p>
+            <p style="font-size: 12px; margin: 0;">50 bandi = 50 conversazioni separate. Alla fine avete 50 output tutti diversi: non potete unirli n&eacute; confrontarli.</p>
+        </div>
+        <div class="card card-red" style="padding: 16px 20px;">
+            <p style="font-size: 13px; font-weight: 700; color: var(--red); margin-bottom: 4px;">Nessuna garanzia</p>
+            <p style="font-size: 12px; margin: 0;">L'accuratezza non &egrave; misurabile. Al massimo &ldquo;sperate&rdquo; che la risposta sia corretta. Non c'&egrave; modo di garantire qualit&agrave; nel tempo.</p>
+        </div>
+    </div>
+
+    <div style="flex: 1;">
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th style="width: 22%; background: var(--black); color: white;">Aspetto</th>
+                    <th style="width: 39%; background: var(--red); color: white;">Chat AI (ChatGPT, Claude...)</th>
+                    <th style="width: 39%; background: var(--green); color: white;">Piattaforma INCIDE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Output</strong></td>
+                    <td class="before-col">Testo libero, cambia ogni volta</td>
+                    <td class="after-col">Dati strutturati, formato costante</td>
+                </tr>
+                <tr>
+                    <td><strong>Affidabilit&agrave;</strong></td>
+                    <td class="before-col">Imprevedibile, nessuna garanzia</td>
+                    <td class="after-col">Misurabile, fino al 99,9% di accuratezza</td>
+                </tr>
+                <tr>
+                    <td><strong>Scalabilit&agrave;</strong></td>
+                    <td class="before-col">Un documento per volta</td>
+                    <td class="after-col">Migliaia di documenti in massa</td>
+                </tr>
+                <tr>
+                    <td><strong>Confronto</strong></td>
+                    <td class="before-col">Manuale, rielaborando ogni volta</td>
+                    <td class="after-col">Automatico, con filtri e ricerca</td>
+                </tr>
+                <tr>
+                    <td><strong>Matching aziendale</strong></td>
+                    <td class="before-col">Soggettivo, non ripetibile</td>
+                    <td class="after-col">Automatico vs requisiti interni</td>
+                </tr>
+                <tr>
+                    <td><strong>Tempo</strong></td>
+                    <td class="before-col">1000x pi&ugrave; lento su processi ripetuti</td>
+                    <td class="after-col">Elaborazione industriale</td>
+                </tr>
+                <tr>
+                    <td><strong>Riusabilit&agrave;</strong></td>
+                    <td class="before-col">Output fragili, non allineati</td>
+                    <td class="after-col">Dati pronti per database e applicazioni</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="grid-2" style="margin-top: 12px; gap: 16px;">
+        <div class="example-box" style="background: var(--red-light); border: 1px solid rgba(214,69,69,0.2);">
+            <p style="font-size: 12px; font-weight: 700; color: var(--red); margin-bottom: 6px;">&#128172; CHAT AI &mdash; come compilare un modulo a memoria</p>
+            <p style="font-size: 11px; color: #888; font-family: 'Courier New', monospace; line-height: 1.6; margin: 0;">
+                "L'importo sembra essere circa 1,2M&euro;<br>
+                ma potrebbe variare... ci sono anche<br>
+                dei sub-criteri da considerare..."
+            </p>
+        </div>
+        <div class="example-box" style="background: var(--green-light); border: 1px solid rgba(76,175,159,0.3);">
+            <p style="font-size: 12px; font-weight: 700; color: var(--green); margin-bottom: 6px;">&#128202; INCIDE &mdash; un modulo con caselle predefinite</p>
+            <p style="font-size: 11px; color: #555; font-family: 'Courier New', monospace; line-height: 1.6; margin: 0;">
+                Importo: &euro;1.250.000 | Scad: 15/04<br>
+                Categoria: OG3 | SOA: III-bis<br>
+                Match aziendale: 87% &rarr; GO
+            </p>
+        </div>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 6: COME FUNZIONA + CAPACITÀ AI ==================== -->
+<div class="slide" id="slide-6">
+    <div class="section-label">Flusso utente</div>
+    <h2>Quattro passi. <span class="accent">Nessuna complessit&agrave;.</span></h2>
+
+    <!-- HEADER COLONNE -->
+    <div class="grid-4" style="margin-top: 8px; gap: 16px;">
+        <div style="text-align: center;"><div class="step-number" style="margin: 0 auto 4px; width: 36px; height: 36px; font-size: 15px;">1</div><p style="font-size: 15px; font-weight: 700; margin: 0;">Carica</p></div>
+        <div style="text-align: center;"><div class="step-number" style="margin: 0 auto 4px; width: 36px; height: 36px; font-size: 15px;">2</div><p style="font-size: 15px; font-weight: 700; margin: 0;">Analizza</p></div>
+        <div style="text-align: center;"><div class="step-number" style="margin: 0 auto 4px; width: 36px; height: 36px; font-size: 15px;">3</div><p style="font-size: 15px; font-weight: 700; margin: 0;">Confronta</p></div>
+        <div style="text-align: center;"><div class="step-number" style="margin: 0 auto 4px; width: 36px; height: 36px; font-size: 15px;">4</div><p style="font-size: 15px; font-weight: 700; margin: 0;">Decidi</p></div>
+    </div>
+
+    <!-- RIGA UTENTE -->
+    <p style="font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin: 12px 0 6px;">&#128100; Cosa fate voi</p>
+    <div class="grid-4" style="gap: 14px;">
+        <div class="card card-orange" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Caricate i documenti di gara</p></div>
+        <div class="card card-orange" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Rivedete i dati estratti</p></div>
+        <div class="card card-orange" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Valutate il match aziendale</p></div>
+        <div class="card card-orange" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Go/no-go con dati oggettivi</p></div>
+    </div>
+
+    <!-- RIGA AI -->
+    <p style="font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green); margin: 10px 0 6px;">&#129302; Cosa fa l’AI</p>
+    <div class="grid-4" style="gap: 14px;">
+        <div class="card card-green" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Riconosce il tipo di documento</p></div>
+        <div class="card card-green" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Estrae campi strutturati</p></div>
+        <div class="card card-green" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Matching automatico requisiti</p></div>
+        <div class="card card-green" style="padding: 10px 14px;"><p style="font-size: 12px; margin: 0;">Registra feedback e calibra</p></div>
+    </div>
+
+    <!-- FEEDBACK LOOP -->
+    <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+        <div style="flex:1; height: 2px; background: linear-gradient(90deg, var(--orange), var(--green));"></div>
+        <div style="background: var(--green); color: white; border-radius: 20px; padding: 4px 12px; font-size: 10px; font-weight: 700; white-space: nowrap;">&#8635; Ciclo di miglioramento continuo</div>
+    </div>
+
+    <!-- CAPACITÀ AI DETTAGLIATE -->
+    <div class="separator" style="margin: 12px 0 8px;"></div>
+    <p style="font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px;">Capacit&agrave; della piattaforma</p>
+    <div class="grid-3" style="gap: 10px;">
+        <div class="card" style="padding: 12px 14px; border-top: 2px solid var(--orange);">
+            <p style="font-size: 12px; font-weight: 600; margin: 0 0 2px;">&#128196; Estrazione automatica</p>
+            <p style="font-size: 11px; margin: 0; color: #777;">Importi, scadenze, requisiti, criteri. Sempre lo stesso formato.</p>
+        </div>
+        <div class="card" style="padding: 12px 14px; border-top: 2px solid var(--orange);">
+            <p style="font-size: 12px; font-weight: 600; margin: 0 0 2px;">&#128279; Analisi combinata</p>
+            <p style="font-size: 11px; margin: 0; color: #777;">Bando + disciplinare incrociati in un’unica analisi.</p>
+        </div>
+        <div class="card" style="padding: 12px 14px; border-top: 2px solid var(--orange);">
+            <p style="font-size: 12px; font-weight: 600; margin: 0 0 2px;">&#9881;&#65039; Elaborazione massiva</p>
+            <p style="font-size: 11px; margin: 0; color: #777;">Migliaia di bandi al giorno, dati sempre allineati.</p>
+        </div>
+        <div class="card" style="padding: 12px 14px; border-top: 2px solid var(--orange);">
+            <p style="font-size: 12px; font-weight: 600; margin: 0 0 2px;">&#128260; Confronto requisiti</p>
+            <p style="font-size: 11px; margin: 0; color: #777;">Da 100 bandi a 5 davvero opportuni.</p>
+        </div>
+        <div class="card" style="padding: 12px 14px; border-top: 2px solid var(--orange);">
+            <p style="font-size: 12px; font-weight: 600; margin: 0 0 2px;">&#128221; Assemblaggio doc</p>
+            <p style="font-size: 11px; margin: 0; color: #777;">Documentazione amministrativa dai dati estratti.</p>
+        </div>
+        <div class="card" style="padding: 12px 14px; border-top: 2px solid var(--orange);">
+            <p style="font-size: 12px; font-weight: 600; margin: 0 0 2px;">&#128172; Anche via chat</p>
+            <p style="font-size: 11px; margin: 0; color: #777;">Si collega al vostro assistente AI per analisi al volo.</p>
+        </div>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 7: PIATTAFORMA DATI ==================== -->
+<div class="slide" id="slide-7">
+    <div class="section-label">Piattaforma dati</div>
+    <h2>Ogni analisi &egrave; <span class="accent">un asset che resta</span></h2>
+    <p class="subtitle" style="margin-bottom: 28px;">I dati estratti hanno valore di per s&eacute;: sono mattoni riusabili per qualunque applicazione.</p>
+
+    <div class="grid-3" style="flex: 1; align-items: start;">
+        <div class="card" style="border-top: 3px solid var(--orange);">
+            <div style="font-size: 36px; margin-bottom: 12px;">&#128451;&#65039;</div>
+            <h3>Archivio storico</h3>
+            <ul class="bullet-list">
+                <li><span class="bullet"></span>Archivio di tutte le estrazioni</li>
+                <li><span class="bullet"></span>Ricerca tra gare passate</li>
+                <li><span class="bullet"></span>Deduplicazione automatica</li>
+                <li><span class="bullet"></span>Stati decisionali per gara (go/no-go)</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-top: 3px solid var(--orange);">
+            <div style="font-size: 36px; margin-bottom: 12px;">&#128202;</div>
+            <h3>Tassonomia comune</h3>
+            <ul class="bullet-list">
+                <li><span class="bullet"></span>Linguaggio condiviso per tutti i campi</li>
+                <li><span class="bullet"></span>Catalogo tipi documento</li>
+                <li><span class="bullet"></span>Definizioni univoche dei dati</li>
+                <li><span class="bullet"></span>Coerenza tra team e reparti</li>
+            </ul>
+        </div>
+
+        <div class="card" style="border-top: 3px solid var(--orange);">
+            <div style="font-size: 36px; margin-bottom: 12px;">&#128229;</div>
+            <h3>Export e integrazioni</h3>
+            <ul class="bullet-list">
+                <li><span class="bullet"></span>Download Excel formattato</li>
+                <li><span class="bullet"></span>Formati compatibili con fogli di calcolo</li>
+                <li><span class="bullet"></span>Selezione dati su misura</li>
+                <li><span class="bullet"></span>Integrazione con i vostri strumenti*</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card card-orange" style="margin-top: 16px;">
+        <p style="font-size: 14px; margin: 0;">*<strong>L'integrazione con i vostri sistemi</strong> (gestionali, intranet, ERP) &egrave; possibile e va valutata caso per caso in base agli strumenti che utilizzate. Ne parliamo insieme durante la Fase 0.</p>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 8: BEFORE / AFTER ==================== -->
+<div class="slide" id="slide-8">
+    <div class="section-label">Il cambiamento</div>
+    <h2><span style="color: var(--red);">Prima</span> vs <span style="color: var(--green);">Dopo</span></h2>
+    <p class="subtitle" style="margin-bottom: 28px;">Confronto diretto tra il processo attuale e quello con la piattaforma INCIDE.</p>
+
+    <div style="flex: 1;">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Aspetto</th>
+                    <th style="width: 37.5%; background: var(--red);">Prima</th>
+                    <th style="width: 37.5%; background: var(--green);">Dopo &mdash; con INCIDE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Tempo per gara</strong></td>
+                    <td class="before-col">~32 ore (4 giorni)</td>
+                    <td class="after-col">~4 ore</td>
+                </tr>
+                <tr>
+                    <td><strong>Estrazione dati</strong></td>
+                    <td class="before-col">Manuale o chat imprevedibile</td>
+                    <td class="after-col">Automatica, formato costante</td>
+                </tr>
+                <tr>
+                    <td><strong>Accuratezza</strong></td>
+                    <td class="before-col">Nessuna garanzia</td>
+                    <td class="after-col">Misurabile con test automatici</td>
+                </tr>
+                <tr>
+                    <td><strong>Volume</strong></td>
+                    <td class="before-col">Un bando alla volta</td>
+                    <td class="after-col">Pi&ugrave; bandi in contemporanea</td>
+                </tr>
+                <tr>
+                    <td><strong>Verifica idoneit&agrave;</strong></td>
+                    <td class="before-col">Lunga, richiede doppio controllo</td>
+                    <td class="after-col">Matching automatico vs profilo aziendale</td>
+                </tr>
+                <tr>
+                    <td><strong>Storico gare</strong></td>
+                    <td class="before-col">Sparso tra file e email</td>
+                    <td class="after-col">Archivio centralizzato, ricercabile</td>
+                </tr>
+                <tr>
+                    <td><strong>Riusabilit&agrave; dati</strong></td>
+                    <td class="before-col">Output fragili, non confrontabili</td>
+                    <td class="after-col">Dati pronti per applicazioni e report</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 9: KPI ==================== -->
+<div class="slide" id="slide-9">
+    <div class="section-label">Risultati attesi</div>
+    <h2>Impatto <span class="accent">misurabile</span></h2>
+    <p class="subtitle" style="margin-bottom: 8px;">Stime basate sull'analisi del processo attuale dei nostri clienti.</p>
+
+    <div class="grid-3" style="margin-top: 28px;">
+        <div class="card kpi-card" style="border-top: 4px solid var(--green);">
+            <div class="kpi-value">~87%</div>
+            <div class="kpi-label">Tempo risparmiato per gara<br><span style="font-size: 13px; color: #aaa;">da ~32 ore a ~4 ore</span></div>
+        </div>
+
+        <div class="card kpi-card" style="border-top: 4px solid var(--green);">
+            <div class="kpi-value" style="font-size: 30px;">Verificabile</div>
+            <div class="kpi-label">Accuratezza misurabile<br><span style="font-size: 13px; color: #aaa;">con test automatici su ogni estrazione</span></div>
+        </div>
+
+        <div class="card kpi-card" style="border-top: 4px solid var(--green);">
+            <div class="kpi-value" style="font-size: 30px;">Pi&ugrave; gare<br>valutate</div>
+            <div class="kpi-label">Volume analizzabile in crescita<br><span style="font-size: 13px; color: #aaa;">pi&ugrave; documenti in parallelo, meno colli di bottiglia</span></div>
+        </div>
+    </div>
+
+    <div class="separator" style="margin: 28px 0;"></div>
+
+    <div class="grid-2">
+        <div class="card card-green">
+            <h3 style="color: var(--green); font-size: 16px;">ROI Operativo</h3>
+            <ul class="bullet-list" style="margin-top: 8px;">
+                <li><span class="bullet" style="background: var(--green);"></span><span style="font-size: 15px;"><strong>Efficienza:</strong> ore liberate, decisioni pi&ugrave; rapide</span></li>
+                <li><span class="bullet" style="background: var(--green);"></span><span style="font-size: 15px;"><strong>Affidabilit&agrave;:</strong> output consistente e misurabile</span></li>
+            </ul>
+        </div>
+        <div class="card card-orange">
+            <h3 style="color: var(--orange); font-size: 16px;">ROI Strategico</h3>
+            <ul class="bullet-list" style="margin-top: 8px;">
+                <li><span class="bullet"></span><span style="font-size: 15px;"><strong>Coordinamento:</strong> allineamento tra reparti</span></li>
+                <li><span class="bullet"></span><span style="font-size: 15px;"><strong>Vantaggio competitivo:</strong> dati unici, capacit&agrave; nuove</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <p style="font-size: 12px; color: #aaa; margin-top: 12px; text-align: right;">Fonte: analisi su oltre 100 interviste ad aziende del settore</p>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 10: PRICING - TABELLA FEATURE ==================== -->
+<div class="slide" id="slide-10">
+    <div class="section-label">Pricing</div>
+    <h2>Piani <span class="accent">su misura</span></h2>
+    <p class="subtitle" style="margin-bottom: 24px;">Scegliete il piano in base alle vostre esigenze. Tutte le funzionalit&agrave; a colpo d'occhio.</p>
+
+    <div style="flex: 1; overflow-y: auto;">
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th style="text-align: left; width: 40%; background: var(--black);">Funzionalit&agrave;</th>
+                    <th style="width: 20%; background: var(--black);"><span style="display:block; font-size: 15px; font-weight: 800;">&euro;99</span><span style="opacity: 0.7;">Starter / mese</span></th>
+                    <th style="width: 20%; background: var(--orange);"><span style="display:block; font-size: 15px; font-weight: 800;">&euro;299</span><span style="opacity: 0.9;">Professional / mese</span></th>
+                    <th style="width: 20%; background: var(--green);"><span style="display:block; font-size: 15px; font-weight: 800;">Custom</span><span style="opacity: 0.9;">Enterprise</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="section-row"><td colspan="4">Base</td></tr>
+                <tr>
+                    <td>Estrazione dati automatica</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Riconoscimento tipo documento</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Export Excel + archivio permanente</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Supporto email</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr class="section-row"><td colspan="4">Avanzate</td></tr>
+                <tr>
+                    <td>Analisi combinata bando + disciplinare</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Confronto requisiti azienda-gara</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Tassonomia personalizzata</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Elaborazione illimitata</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Supporto prioritario</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr class="section-row"><td colspan="4">Personalizzazioni</td></tr>
+                <tr>
+                    <td>Integrazioni con i vostri gestionali</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Multi-reparto</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Agenti intelligenti + workflow</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Account manager dedicato</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="dash">&mdash;</td>
+                    <td class="check">&#10003;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" style="margin-top: 12px; text-align: center;">
+        <p style="font-size: 12px; color: #999; margin: 0;">Prezzi di listino IVA esclusa. I costi di infrastruttura e consumo AI sono a parte e dipendono dal volume. Sconti disponibili su trattativa.</p>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 11: PIANO CUSTOM - SETUP E ROI ==================== -->
+<div class="slide" id="slide-11">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <div class="section-label" style="margin-bottom: 0;">Piano Custom</div>
+        <span class="badge badge-green">ENTERPRISE</span>
+    </div>
+    <h2>Setup dedicato, <span class="accent">ritorno concreto</span></h2>
+    <p class="subtitle" style="margin-bottom: 24px;">Il piano Enterprise include un setup su misura per adattare la piattaforma ai vostri processi e documenti.</p>
+
+    <div class="grid-2" style="flex: 1;">
+        <div>
+            <div class="card" style="margin-bottom: 24px; border-top: 3px solid var(--green);">
+                <h3>Costo di setup</h3>
+                <div style="display: flex; align-items: baseline; gap: 8px; margin: 16px 0;">
+                    <span style="font-size: 42px; font-weight: 800; color: var(--green);">&euro;5-15K</span>
+                    <span style="font-size: 16px; color: #999;">una tantum</span>
+                </div>
+                <ul class="bullet-list">
+                    <li><span class="bullet" style="background: var(--green);"></span>Configurazione piattaforma su misura</li>
+                    <li><span class="bullet" style="background: var(--green);"></span>Calibrazione AI sui vostri documenti</li>
+                    <li><span class="bullet" style="background: var(--green);"></span>Definizione tassonomia e campi</li>
+                    <li><span class="bullet" style="background: var(--green);"></span>Formazione team operativo</li>
+                    <li><span class="bullet" style="background: var(--green);"></span>Test e validazione con gare reali</li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <div class="card card-green" style="margin-bottom: 24px;">
+                <h3 style="color: var(--green);">Calcolo indicativo</h3>
+                <p style="font-size: 15px; margin-top: 8px;">Se analizzate <strong>5 gare al mese</strong> e risparmiate <strong>~28 ore per gara</strong>, sono <strong>~140 ore/mese</strong> di lavoro restituito al team.</p>
+                <p style="font-size: 14px; color: var(--green); margin-top: 12px; font-weight: 600;">Il valore generato pu&ograve; superare il costo del piano gi&agrave; nei primi mesi di utilizzo.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--green);">
+                <h3 style="font-size: 16px;">Cosa include</h3>
+                <p style="font-size: 14px; margin-top: 8px;">Il costo varia in base alla complessit&agrave; dei vostri documenti e al numero di integrazioni richieste. Lo definiamo insieme durante la Fase 0.</p>
+            </div>
+        </div>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 12: EVOLUZIONI SU MISURA ==================== -->
+<div class="slide" id="slide-12">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <div class="section-label" style="margin-bottom: 0;">Piano Custom</div>
+        <span class="badge badge-green">ENTERPRISE</span>
+    </div>
+    <h2>Partite dalla base.<br><span class="accent">Poi costruiamo insieme.</span></h2>
+    <p class="subtitle" style="margin-bottom: 28px;">La piattaforma funziona da subito. Quando le vostre esigenze crescono, costruiamo soluzioni ad hoc sopra i dati gi&agrave; estratti.</p>
+
+    <div class="grid-2" style="flex: 1; gap: 32px;">
+        <div>
+            <div class="highlight-box" style="margin-bottom: 24px;">
+                <h3 style="font-size: 18px;">&#10003; Fase 1: la piattaforma</h3>
+                <p style="font-size: 15px; margin-top: 8px; opacity: 0.9;">Estrazione, confronto, archivio, export. Tutto quello che serve per lo screening gare. Funziona dal primo giorno.</p>
+            </div>
+            <div class="card" style="border: 2px dashed var(--green); background: white;">
+                <h3 style="font-size: 18px; color: var(--green);">&#8594; Fase 2: soluzioni ad hoc</h3>
+                <p style="font-size: 15px; margin-top: 8px;">Quando siete pronti, costruiamo sopra la base. Ogni soluzione nasce dalle vostre esigenze reali, non da un catalogo predefinito.</p>
+            </div>
+        </div>
+
+        <div>
+            <p style="font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green); margin-bottom: 16px;">Esempi di evoluzioni possibili</p>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 16px; padding: 14px 20px; background: var(--green-light); border-radius: 8px; border: 1px solid rgba(76,175,159,0.2);">
+                    <span style="font-size: 22px; flex-shrink: 0;">&#128200;</span>
+                    <div>
+                        <p style="font-size: 14px; font-weight: 600; margin: 0;">Dashboard e report</p>
+                        <p style="font-size: 12px; color: #888; margin: 0;">Statistiche in tempo reale sulle vostre gare</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px; padding: 14px 20px; background: var(--green-light); border-radius: 8px; border: 1px solid rgba(76,175,159,0.2);">
+                    <span style="font-size: 22px; flex-shrink: 0;">&#9881;&#65039;</span>
+                    <div>
+                        <p style="font-size: 14px; font-weight: 600; margin: 0;">Workflow automatici</p>
+                        <p style="font-size: 12px; color: #888; margin: 0;">Approvazioni e filtri senza intervento manuale</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px; padding: 14px 20px; background: var(--green-light); border-radius: 8px; border: 1px solid rgba(76,175,159,0.2);">
+                    <span style="font-size: 22px; flex-shrink: 0;">&#128279;</span>
+                    <div>
+                        <p style="font-size: 14px; font-weight: 600; margin: 0;">Integrazioni gestionali</p>
+                        <p style="font-size: 12px; color: #888; margin: 0;">Dati che si riversano nei vostri sistemi</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px; padding: 14px 20px; background: var(--green-light); border-radius: 8px; border: 1px solid rgba(76,175,159,0.2);">
+                    <span style="font-size: 22px; flex-shrink: 0;">&#128276;</span>
+                    <div>
+                        <p style="font-size: 14px; font-weight: 600; margin: 0;">Alert e notifiche</p>
+                        <p style="font-size: 12px; color: #888; margin: 0;">Avvisi quando escono bandi che vi interessano</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px; padding: 14px 20px; background: var(--green-light); border-radius: 8px; border: 1px solid rgba(76,175,159,0.2);">
+                    <span style="font-size: 22px; flex-shrink: 0;">&#129302;</span>
+                    <div>
+                        <p style="font-size: 14px; font-weight: 600; margin: 0;">Agenti intelligenti</p>
+                        <p style="font-size: 12px; color: #888; margin: 0;">Analisi proattiva delle opportunit&agrave;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 13: SUPPORTO E SLA ==================== -->
+<div class="slide" id="slide-13">
+    <div class="section-label">Supporto</div>
+    <h2>Assistenza <span class="accent">continua</span></h2>
+    <p class="subtitle" style="margin-bottom: 32px;">Livelli di supporto separati dallo sviluppo. Scegliete quello che vi serve.</p>
+
+    <div class="grid-3" style="flex: 1; align-items: start;">
+        <div class="card" style="border-top: 3px solid var(--gray-medium);">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                <span class="badge" style="background: var(--gray-text); color: white; font-size: 10px;">Base</span>
+            </div>
+            <h3 style="font-size: 20px;">Supporto email</h3>
+            <div class="separator" style="margin: 12px 0;"></div>
+            <ul class="bullet-list">
+                <li><span class="bullet" style="background: var(--gray-text);"></span><span style="font-size: 14px;">Risposta entro 48 ore lavorative</span></li>
+                <li><span class="bullet" style="background: var(--gray-text);"></span><span style="font-size: 14px;">Assistenza su problemi operativi</span></li>
+                <li><span class="bullet" style="background: var(--gray-text);"></span><span style="font-size: 14px;">Chiarimenti d'uso</span></li>
+                <li><span class="bullet" style="background: var(--gray-text);"></span><span style="font-size: 14px;">Orario d'ufficio (lun-ven)</span></li>
+            </ul>
+            <p style="font-size: 13px; color: #999; margin-top: 16px;">Incluso in tutti i piani</p>
+        </div>
+
+        <div class="card" style="border-top: 3px solid var(--orange);">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                <span class="badge badge-orange" style="font-size: 10px;">Pro</span>
+            </div>
+            <h3 style="font-size: 20px;">Supporto prioritario</h3>
+            <div class="separator" style="margin: 12px 0;"></div>
+            <ul class="bullet-list">
+                <li><span class="bullet"></span><span style="font-size: 14px;">Risposta entro 8 ore lavorative</span></li>
+                <li><span class="bullet"></span><span style="font-size: 14px;">Canale dedicato (email + telefono)</span></li>
+                <li><span class="bullet"></span><span style="font-size: 14px;">Manutenzione adattativa inclusa</span></li>
+                <li><span class="bullet"></span><span style="font-size: 14px;">Report mensile sullo stato del servizio</span></li>
+            </ul>
+            <p style="font-size: 13px; color: var(--orange); margin-top: 16px; font-weight: 600;">Incluso nel piano Professional</p>
+        </div>
+
+        <div class="card" style="border-top: 3px solid var(--green);">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                <span class="badge badge-green" style="font-size: 10px;">Enterprise</span>
+            </div>
+            <h3 style="font-size: 20px;">Supporto dedicato</h3>
+            <div class="separator" style="margin: 12px 0;"></div>
+            <ul class="bullet-list">
+                <li><span class="bullet" style="background: var(--green);"></span><span style="font-size: 14px;">Risposta entro 4 ore, 7 giorni su 7</span></li>
+                <li><span class="bullet" style="background: var(--green);"></span><span style="font-size: 14px;">Account manager dedicato</span></li>
+                <li><span class="bullet" style="background: var(--green);"></span><span style="font-size: 14px;">Monitoraggio proattivo del servizio</span></li>
+                <li><span class="bullet" style="background: var(--green);"></span><span style="font-size: 14px;">Escalation diretta al team tecnico</span></li>
+            </ul>
+            <p style="font-size: 13px; color: var(--green); margin-top: 16px; font-weight: 600;">Incluso nel piano Enterprise</p>
+        </div>
+    </div>
+
+    <div class="card card-orange" style="margin-top: 16px;">
+        <p style="font-size: 14px; margin: 0;"><strong>Il supporto &egrave; separato dallo sviluppo.</strong> Potete attivare o cambiare livello in qualunque momento, indipendentemente dal piano scelto.</p>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 14: GRAZIE ==================== -->
+<div class="slide" id="slide-14">
+    <div class="flex-grow" style="justify-content: center; align-items: center; text-align: center;">
+        <h1 style="font-size: 56px; margin-bottom: 24px;">Grazie.</h1>
+        <p class="tagline" style="max-width: 600px; margin: 0 auto 32px; text-align: center;">Questa &egrave; la Piattaforma INCIDE.<br>Da documenti a dati. Da giorni a ore.</p>
+        <div class="separator" style="max-width: 200px; margin: 0 auto 32px;"></div>
+        <p style="font-size: 18px; color: #999;">Quello che segue &egrave; come lavoriamo insieme per arrivarci. &rarr;</p>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 15: COME LAVORIAMO - PERCORSO ==================== -->
+<div class="slide" id="slide-15">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <div class="section-label" style="margin-bottom: 0;">Come lavoriamo</div>
+        <span class="badge badge-gray">BACKLOG</span>
+    </div>
+    <h2>Un percorso <span class="accent">graduale e sicuro</span></h2>
+    <p class="subtitle" style="margin-bottom: 36px;">Ogni fase ha obiettivi chiari e criteri di uscita. Nessun salto nel buio.</p>
+
+    <div class="grid-3" style="flex: 1; align-items: start;">
+        <div class="path-card active-path">
+            <div class="path-tag">Fase 1</div>
+            <div class="path-title">Proof of Concept</div>
+            <div class="separator" style="margin: 12px 0;"></div>
+            <div class="path-desc">
+                <strong>Obiettivo:</strong> Dimostrare che funziona sui vostri documenti reali.<br><br>
+                <strong>Scope:</strong> Limitato, pochi tipi di estrazione.<br><br>
+                <strong>Criterio di successo:</strong><br>L'AI estrae correttamente i dati dai vostri bandi campione.
+            </div>
+        </div>
+
+        <div class="path-card">
+            <div class="path-tag">Fase 2</div>
+            <div class="path-title">MVP</div>
+            <div class="separator" style="margin: 12px 0;"></div>
+            <div class="path-desc">
+                <strong>Obiettivo:</strong> Workflow utilizzabile in produzione dal vostro team.<br><br>
+                <strong>Scope:</strong> Integrazioni base, affidabilit&agrave; garantita.<br><br>
+                <strong>Criterio di successo:</strong><br>Il team lo usa quotidianamente. I dati sono affidabili.
+            </div>
+        </div>
+
+        <div class="path-card">
+            <div class="path-tag">Fase 3</div>
+            <div class="path-title">Prodotto</div>
+            <div class="separator" style="margin: 12px 0;"></div>
+            <div class="path-desc">
+                <strong>Obiettivo:</strong> Piattaforma scalabile, sicura, completa.<br><br>
+                <strong>Scope:</strong> Integrazioni complete, monitoraggio, supporto.<br><br>
+                <strong>Criterio di successo:</strong><br>ROI misurabile. Adozione estesa a pi&ugrave; reparti.
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px; text-align: center;">
+        <p style="font-size: 15px; margin: 0;"><strong>Ad ogni fase potete decidere se proseguire.</strong> Nessun vincolo a lungo termine. Ogni investimento &egrave; gi&agrave; di per s&eacute; utile.</p>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 16: FASE 0 ==================== -->
+<div class="slide" id="slide-16">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <div class="section-label" style="margin-bottom: 0;">Il primo passo</div>
+        <span class="badge badge-green">1-2 SETTIMANE</span>
+        <span class="badge badge-gray">BACKLOG</span>
+    </div>
+    <h2>Fase 0: <span class="accent">Analisi e mappatura opportunit&agrave;</span></h2>
+    <p style="font-size: 17px; color: var(--gray-text); margin-bottom: 4px;">Misuriamo il punto di partenza e identifichiamo dove intervenire</p>
+    <p class="subtitle" style="margin-bottom: 28px;">Prima di costruire qualunque cosa, capiamo dove siete e dove volete andare.</p>
+
+    <div class="grid-2" style="flex: 1;">
+        <div>
+            <h3 style="margin-bottom: 20px;">Cosa facciamo</h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: flex; gap: 16px; align-items: flex-start;">
+                    <div class="step-number" style="width: 36px; height: 36px; font-size: 15px;">1</div>
+                    <div>
+                        <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Interviste + mappatura processi</p>
+                        <p style="font-size: 14px; color: #777;">Capiamo come lavorate oggi, dove perdete tempo, cosa funziona.</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 16px; align-items: flex-start;">
+                    <div class="step-number" style="width: 36px; height: 36px; font-size: 15px;">2</div>
+                    <div>
+                        <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">5 Quick Win + 5 Long Term</p>
+                        <p style="font-size: 14px; color: #777;">Identifichiamo le opportunit&agrave; ad alto impatto e basso sforzo.</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 16px; align-items: flex-start;">
+                    <div class="step-number" style="width: 36px; height: 36px; font-size: 15px;">3</div>
+                    <div>
+                        <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Selezione 1-2 da validare</p>
+                        <p style="font-size: 14px; color: #777;">Scegliamo insieme da dove partire per massimizzare l'impatto.</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 16px; align-items: flex-start;">
+                    <div class="step-number" style="width: 36px; height: 36px; font-size: 15px;">4</div>
+                    <div>
+                        <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Punto di partenza + indicatori</p>
+                        <p style="font-size: 14px; color: #777;">Definiamo i numeri di partenza per misurare il miglioramento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 style="margin-bottom: 20px;">Cosa ricevete</h3>
+            <div class="card" style="margin-bottom: 16px; border-left: 4px solid var(--orange);">
+                <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Mappa dello stato attuale</p>
+                <p style="font-size: 14px; color: #777;">Fotografia dei vostri processi as-is, con punti critici evidenziati.</p>
+            </div>
+            <div class="card" style="margin-bottom: 16px; border-left: 4px solid var(--orange);">
+                <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Lista opportunit&agrave; prioritizzata</p>
+                <p style="font-size: 14px; color: #777;">Draft roadmap con Quick Win e investimenti a lungo termine.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--orange);">
+                <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Raccomandazione + budget</p>
+                <p style="font-size: 14px; color: #777;">Proposta concreta per il percorso POC/MVP con stima costi.</p>
+            </div>
+        </div>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== SLIDE 17: CTA ==================== -->
+<div class="slide" id="slide-17">
+    <div class="flex-grow" style="justify-content: center; align-items: center; text-align: center;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px; justify-content: center;">
+            <div class="section-label" style="margin-bottom: 0;">Pronti a iniziare?</div>
+            <span class="badge badge-gray">BACKLOG</span>
+        </div>
+        <h1 style="font-size: 44px; margin-bottom: 16px;">Non chattate pi&ugrave; con i documenti.<br><span class="accent">Costruite software sopra di essi.</span></h1>
+        <p class="tagline" style="max-width: 650px; margin: 0 auto 48px; text-align: center;">Da bandi a dati strutturati. Da giorni a ore. Da sperare che venga bene a misurare che venga bene.</p>
+
+        <div class="grid-3" style="max-width: 800px; margin: 0 auto 48px; gap: 32px;">
+            <div style="text-align: center;">
+                <div class="step-number" style="margin: 0 auto 12px; background: var(--green);">1</div>
+                <p style="font-size: 15px; font-weight: 600;">Chiamata conoscitiva</p>
+                <p style="font-size: 13px; color: #999;">30 minuti per capire le vostre esigenze</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="step-number" style="margin: 0 auto 12px; background: var(--green);">2</div>
+                <p style="font-size: 15px; font-weight: 600;">Fase 0</p>
+                <p style="font-size: 13px; color: #999;">1-2 settimane di mappatura</p>
+            </div>
+            <div style="text-align: center;">
+                <div class="step-number" style="margin: 0 auto 12px; background: var(--green);">3</div>
+                <p style="font-size: 15px; font-weight: 600;">POC con i vostri dati</p>
+                <p style="font-size: 13px; color: #999;">Risultati concreti in poche settimane</p>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 36px;">
+            <a href="mailto:nicola@addictive.dev" class="cta-btn" style="text-decoration: none;">Parliamone &rarr;</a>
+        </div>
+
+        <div style="display: flex; gap: 48px; justify-content: center; align-items: center; margin-top: 16px;">
+            <div style="text-align: center;">
+                <p style="font-size: 14px; font-weight: 600; color: var(--black);">Nicola Brisotto</p>
+                <p style="font-size: 13px; color: #999;">Project Manager</p>
+                <p style="font-size: 13px; color: var(--orange);">nicola@addictive.dev</p>
+            </div>
+            <div style="width: 1px; height: 50px; background: var(--gray-medium);"></div>
+            <div style="text-align: center;">
+                <p style="font-size: 14px; font-weight: 600; color: var(--black);">Addictive s.r.l.</p>
+                <p style="font-size: 13px; color: #999;">Via Sile 41, Roncade (TV)</p>
+                <p style="font-size: 13px; color: var(--orange);">addictive@legalmail.it</p>
+            </div>
+        </div>
+    </div>
+    <div class="logo">ADDICTIVE</div>
+</div>
+
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+    let currentSlide = 1;
+    const totalSlides = 17;
+
+    function showSlide(n) {
+        if (n < 1 || n > totalSlides) return;
+        document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+        document.getElementById(`slide-${n}`).classList.add('active');
+        currentSlide = n;
+        document.getElementById('slide-indicator').textContent = `${n} / ${totalSlides}`;
+        const progress = ((n - 1) / (totalSlides - 1)) * 100;
+        document.getElementById('progress-bar').style.width = `${progress}%`;
+        document.getElementById('prev-btn').style.opacity = n === 1 ? '0.3' : '1';
+        document.getElementById('next-btn').style.opacity = n === totalSlides ? '0.3' : '1';
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+            e.preventDefault(); nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            e.preventDefault(); prevSlide();
+        } else if (e.key === 'Home') {
+            e.preventDefault(); showSlide(1);
+        } else if (e.key === 'End') {
+            e.preventDefault(); showSlide(totalSlides);
+        }
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); }
+    });
+
+    showSlide(1);
+</script>
+
+</body>
+</html>
