@@ -492,6 +492,29 @@
 </head>
 <body>
 
+<!-- PASSWORD GATE -->
+<div id="password-gate" style="display:flex; justify-content:center; align-items:center; height:100vh; width:100vw; background:#1a1a1a; position:fixed; top:0; left:0; z-index:9999;">
+    <div style="text-align:center; background:#fff; padding:48px 56px; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.3); max-width:400px; width:90%;">
+        <div style="font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#E87C3A; margin-bottom:16px;">Addictive &times; Incide Engineering</div>
+        <h2 style="font-size:28px; font-weight:700; color:#2C2C2C; margin-bottom:8px;">Accesso riservato</h2>
+        <p style="font-size:14px; color:#999; margin-bottom:28px;">Inserisci la password per visualizzare la presentazione.</p>
+        <input id="pw-input" type="password" placeholder="Password" style="width:100%; padding:14px 18px; border:2px solid #E0E0E0; border-radius:8px; font-size:16px; font-family:Inter,sans-serif; outline:none; transition:border 0.2s;" onfocus="this.style.borderColor='#E87C3A'" onblur="this.style.borderColor='#E0E0E0'">
+        <p id="pw-error" style="color:#D64545; font-size:13px; margin-top:8px; display:none;">Password errata. Riprova.</p>
+        <button onclick="checkPw()" style="width:100%; margin-top:16px; padding:14px; background:#E87C3A; color:white; border:none; border-radius:8px; font-size:16px; font-weight:700; cursor:pointer; font-family:Inter,sans-serif; transition:background 0.2s;" onmouseover="this.style.background='#d06a2e'" onmouseout="this.style.background='#E87C3A'">Entra</button>
+    </div>
+</div>
+<script>
+function checkPw(){
+    if(document.getElementById('pw-input').value==='incide'){
+        document.getElementById('password-gate').style.display='none';
+    } else {
+        document.getElementById('pw-error').style.display='block';
+        document.getElementById('pw-input').style.borderColor='#D64545';
+    }
+}
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+</script>
+
 <div id="progress-bar"></div>
 <div id="slide-indicator">1 / 17</div>
 <button class="nav-arrow" id="prev-btn" onclick="prevSlide()">&#8592;</button>
